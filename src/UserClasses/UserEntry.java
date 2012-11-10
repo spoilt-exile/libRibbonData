@@ -18,7 +18,7 @@ public class UserEntry extends Generic.CsvElder {
      * @param givenCsv csv raw line
      * @since RibbonServer a2
      */
-    UserEntry(String givenCsv) {
+    public UserEntry(String givenCsv) {
         this.baseCount = 4;
         this.groupCount = 1;
         this.currentFormat = Generic.CsvElder.csvFormatType.ComplexCsv;

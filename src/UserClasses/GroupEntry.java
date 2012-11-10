@@ -23,7 +23,7 @@ public class GroupEntry extends Generic.CsvElder{
      */
     public String COMM;
 
-    GroupEntry(String givenCsv) {
+    public GroupEntry(String givenCsv) {
         this.baseCount = 2;
         this.currentFormat = csvFormatType.SimpleCsv;
         String[] parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv).get(0);
