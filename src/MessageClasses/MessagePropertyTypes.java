@@ -10,7 +10,7 @@ package MessageClasses;
  * Types of message properties.
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  */
-public enum messagePropertyTypes {
+public enum MessagePropertyTypes {
     
     /** Generic properties **/
     URGENT,                     //Message was marked as urgent

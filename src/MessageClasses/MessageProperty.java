@@ -12,13 +12,13 @@ package MessageClasses;
  * @since RibbonServer a2
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  */
-public class messageProperty extends Generic.csvElder {
+public class MessageProperty extends Generic.CsvElder {
     
     /**
      * Prefix of the property. 
      * Displays type of property.
      */
-    public messagePropertyTypes PROPERTY_PREFIX;
+    public MessagePropertyTypes PROPERTY_PREFIX;
     
     /**
      * Owner of this property.
@@ -38,7 +38,7 @@ public class messageProperty extends Generic.csvElder {
     /**
      * Empty configuration constructor.
      */
-    messageProperty() {
+    MessageProperty() {
         this.baseCount = 4;
         this.currentFormat = csvFormatType.SimpleCsv;
     }
@@ -47,11 +47,11 @@ public class messageProperty extends Generic.csvElder {
      * Default constructor from csv form.
      * @param givenCsv given csv line
      */
-    messageProperty(String givenCsv) {
+    MessageProperty(String givenCsv) {
         this();
-        java.util.ArrayList<String[]> parsedStruct = Generic.csvFormat.fromCsv(this, givenCsv);
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
-        this.PROPERTY_PREFIX = messagePropertyTypes.valueOf(baseArray[0]);
+        this.PROPERTY_PREFIX = MessagePropertyTypes.valueOf(baseArray[0]);
         this.USER = baseArray[1];
         this.TEXT_MESSAGE = baseArray[2];
         this.DATE = baseArray[3];
@@ -64,7 +64,7 @@ public class messageProperty extends Generic.csvElder {
      * @param givenMessage
      * @param givenDate 
      */
-    messageProperty(messagePropertyTypes givenPrefix, String givenUser, String givenMessage, String givenDate) {
+    MessageProperty(MessagePropertyTypes givenPrefix, String givenUser, String givenMessage, String givenDate) {
         
     }
 

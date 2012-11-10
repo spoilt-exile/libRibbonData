@@ -11,7 +11,7 @@ package UserClasses;
  * Contatins all information about single group record.
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  */
-public class groupEntry extends Generic.csvElder{
+public class GroupEntry extends Generic.CsvElder{
     
     /**
      * Name of the group
@@ -23,10 +23,10 @@ public class groupEntry extends Generic.csvElder{
      */
     public String COMM;
 
-    groupEntry(String givenCsv) {
+    GroupEntry(String givenCsv) {
         this.baseCount = 2;
         this.currentFormat = csvFormatType.SimpleCsv;
-        String[] parsedStruct = Generic.csvFormat.fromCsv(this, givenCsv).get(0);
+        String[] parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv).get(0);
         GROUP_NAME = parsedStruct[0];
         COMM = parsedStruct[1];
     }

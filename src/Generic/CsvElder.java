@@ -12,7 +12,7 @@ package Generic;
  * 
  * @author Stanislav Nepochatov
  */
-public abstract class csvElder {
+public abstract class CsvElder {
     
     /**
      * Count of arguments which may be 

@@ -11,7 +11,7 @@ package Generic;
  * for supporting csv format.
  * @author Stanislav Nepochatov
  */
-public abstract class csvFormat {
+public abstract class CsvFormat {
     
     /**
      * Notify main parser method about special chars<br><br>
@@ -284,14 +284,14 @@ public abstract class csvFormat {
      * @param givenProperties arraylist with properties;
      * @return formated csv form for storing properties objects;
      */
-    public static String renderMessageProperties(java.util.ArrayList<MessageClasses.messageProperty> givenProperties) {
+    public static String renderMessageProperties(java.util.ArrayList<MessageClasses.MessageProperty> givenProperties) {
         if (givenProperties.isEmpty()) {
             return "{}";
         } else {
             String returned = "{";
-            java.util.ListIterator<MessageClasses.messageProperty> propIter = givenProperties.listIterator();
+            java.util.ListIterator<MessageClasses.MessageProperty> propIter = givenProperties.listIterator();
             while (propIter.hasNext()) {
-                MessageClasses.messageProperty currProp = propIter.next();
+                MessageClasses.MessageProperty currProp = propIter.next();
                 if (propIter.hasNext()) {
                     returned += currProp.toCsv() + "$";
                 } else {
@@ -311,17 +311,17 @@ public abstract class csvFormat {
      * @param givenCsv given csv line;
      * @return parsed struct;
      */
-    public static java.util.ArrayList<String[]> fromCsv(Generic.csvElder givenClass, String givenCsv) {
+    public static java.util.ArrayList<String[]> fromCsv(Generic.CsvElder givenClass, String givenCsv) {
         switch (givenClass.currentFormat) {
             case SimpleCsv:
                 java.util.ArrayList<String[]> parsed = new java.util.ArrayList<String[]>();
-                parsed.add(csvFormat.commonParseLine(givenCsv, givenClass.baseCount));
+                parsed.add(CsvFormat.commonParseLine(givenCsv, givenClass.baseCount));
                 return parsed;
             case ComplexCsv:
-                return csvFormat.complexParseLine(givenCsv, givenClass.baseCount, givenClass.groupCount);
+                return CsvFormat.complexParseLine(givenCsv, givenClass.baseCount, givenClass.groupCount);
             case DoubleStruct:
                 java.util.ArrayList<String[]> parsedDouble = new java.util.ArrayList<String[]>();
-                parsedDouble.add(csvFormat.parseDoubleStruct(givenCsv));
+                parsedDouble.add(CsvFormat.parseDoubleStruct(givenCsv));
                 return parsedDouble;
         }
         return null;

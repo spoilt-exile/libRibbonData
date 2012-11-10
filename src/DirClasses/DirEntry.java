@@ -13,13 +13,13 @@ package DirClasses;
  * of it child directories.</p>
  * @author Stanislav Nepochatov
  */
-public class dirEntry extends dirSchema {
+public class DirEntry extends DirSchema {
         
     /**
      * Default constructor (empty)
      * Usually this constructor used for creating root dir
      */
-    public dirEntry() {
+    public DirEntry() {
         DIR_NAME = "";
         FULL_DIR_NAME = "";
         DIR_ACCESS = null;
@@ -29,7 +29,7 @@ public class dirEntry extends dirSchema {
      * Schema-based end constructor
      * @param givenSchema schema to build directory
      */
-    public dirEntry(DirClasses.dirSchema givenSchema) {
+    public DirEntry(DirClasses.DirSchema givenSchema) {
         applySchema(givenSchema);
     }
 
@@ -41,7 +41,7 @@ public class dirEntry extends dirSchema {
      * @param givenPath path for images
      * @param givenAnon anonymous mode flag
      */
-    public dirEntry(String upperLevel, String rest, DirClasses.dirSchema givenSchema) {
+    public DirEntry(String upperLevel, String rest, DirClasses.DirSchema givenSchema) {
         Integer joint;
         if ((joint = rest.indexOf(".")) != -1) {
             DIR_NAME = rest.substring(0, joint);
@@ -53,7 +53,7 @@ public class dirEntry extends dirSchema {
             DIR_PATH = FULL_DIR_NAME.toLowerCase().replaceAll("\\.", "/") + "/";
             new java.io.File(DIR_PATH).mkdirs();
             COMM = "Порожній напрямок";
-            FOLDED_DIR.add(new dirEntry(FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
+            FOLDED_DIR.add(new DirEntry(FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
         } else {
             applySchema(givenSchema);
             new java.io.File(DIR_PATH).mkdirs();
@@ -68,7 +68,7 @@ public class dirEntry extends dirSchema {
     /**
      * Arraylist of inner directiries
      */
-    public java.util.ArrayList<dirEntry> FOLDED_DIR = new java.util.ArrayList<>();
+    public java.util.ArrayList<DirEntry> FOLDED_DIR = new java.util.ArrayList<>();
 
     /**
      * Arraylist of messages indexes
@@ -84,13 +84,13 @@ public class dirEntry extends dirSchema {
      * Access array of this directory
      * @since RibbonServer a2
      */
-    public dirPermissionEntry[] DIR_ACCESS;
+    public DirPermissionEntry[] DIR_ACCESS;
 
     /**
      * Last searched directory
      * @since RibbonServer a2
      */
-    private dirEntry lastEntry;
+    private DirEntry lastEntry;
 
     /**
      * Insert chain of directories in current directory
@@ -100,7 +100,7 @@ public class dirEntry extends dirSchema {
      * @param givenPath path for images
      * @param givenAnon anonymous mode flag
      */
-    public void insertDir(String upperLevel, String rest, DirClasses.dirSchema givenSchema) {
+    public void insertDir(String upperLevel, String rest, DirClasses.DirSchema givenSchema) {
         Integer joint;
         if ((joint = rest.indexOf(".")) != -1) {
             String inserted_DIR_NAME = rest.substring(0, joint);
@@ -114,9 +114,9 @@ public class dirEntry extends dirSchema {
                 lastEntry.insertDir(inserted_FULL_DIR_NAME, rest.substring(joint + 1), givenSchema);
             } else {
                 if (this.DIR_NAME.isEmpty()) {
-                    this.FOLDED_DIR.add(new dirEntry("", rest, givenSchema));
+                    this.FOLDED_DIR.add(new DirEntry("", rest, givenSchema));
                 } else {
-                    this.FOLDED_DIR.add(new dirEntry(inserted_FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
+                    this.FOLDED_DIR.add(new DirEntry(inserted_FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
                 }
             }
         } else {
@@ -124,7 +124,7 @@ public class dirEntry extends dirSchema {
             if (hasFoldDir(inserted_DIR_NAME)) {
                 lastEntry.applySchema(givenSchema);
             } else {
-                FOLDED_DIR.add(new dirEntry(upperLevel, rest, givenSchema));
+                FOLDED_DIR.add(new DirEntry(upperLevel, rest, givenSchema));
             }
         }
     }
@@ -135,9 +135,9 @@ public class dirEntry extends dirSchema {
      * @return true if this entry contain such directory in it's children
      */
     private Boolean hasFoldDir(String foldedDirName) {
-        java.util.ListIterator<dirEntry> dirIter = FOLDED_DIR.listIterator();
+        java.util.ListIterator<DirEntry> dirIter = FOLDED_DIR.listIterator();
         while (dirIter.hasNext()) {
-            dirEntry foldedDir = dirIter.next();
+            DirEntry foldedDir = dirIter.next();
             if (foldedDir.DIR_NAME.equals(foldedDirName)) {
                 lastEntry = foldedDir;
                 return true;
@@ -150,7 +150,7 @@ public class dirEntry extends dirSchema {
      * Apply schema to given directory;
      * @param givenSchema 
      */
-    public void applySchema(DirClasses.dirSchema givenSchema) {
+    public void applySchema(DirClasses.DirSchema givenSchema) {
         this.FULL_DIR_NAME = givenSchema.FULL_DIR_NAME;
         this.COMM = givenSchema.COMM;
         this.DIR_LANGS = givenSchema.DIR_LANGS;
@@ -158,9 +158,9 @@ public class dirEntry extends dirSchema {
         if (givenSchema.SH_ACCESS.length == 1 && givenSchema.SH_ACCESS[0].isEmpty()) {
             this.DIR_ACCESS = null;
         } else {
-            this.DIR_ACCESS = new dirPermissionEntry[givenSchema.SH_ACCESS.length];
+            this.DIR_ACCESS = new DirPermissionEntry[givenSchema.SH_ACCESS.length];
             for (Integer accessIndex = 0; accessIndex < givenSchema.SH_ACCESS.length; accessIndex++) {
-                this.DIR_ACCESS[accessIndex] = new dirPermissionEntry(givenSchema.SH_ACCESS[accessIndex]);
+                this.DIR_ACCESS[accessIndex] = new DirPermissionEntry(givenSchema.SH_ACCESS[accessIndex]);
             }
         }
         String[] chunks = this.FULL_DIR_NAME.split("\\.");
@@ -178,11 +178,11 @@ public class dirEntry extends dirSchema {
         for (Integer space = 0; space < inLevel; space++) {
             spaceStr += "   ";
         }
-        String returned = spaceStr + this.DIR_NAME + " (" + this.DIR_INDEXCES.size() + ") " + Generic.csvFormat.renderGroup(this.DIR_LANGS) + " : " + this.COMM + "\n";
+        String returned = spaceStr + this.DIR_NAME + " (" + this.DIR_INDEXCES.size() + ") " + Generic.CsvFormat.renderGroup(this.DIR_LANGS) + " : " + this.COMM + "\n";
         if (!this.FOLDED_DIR.isEmpty()) {
-            java.util.ListIterator<dirEntry> foldedIter = this.FOLDED_DIR.listIterator();
+            java.util.ListIterator<DirEntry> foldedIter = this.FOLDED_DIR.listIterator();
             while (foldedIter.hasNext()) {
-                dirEntry foldDir = foldedIter.next();
+                DirEntry foldDir = foldedIter.next();
                 returned += foldDir.treeReport(inLevel + 1);
             }
         }
@@ -245,7 +245,7 @@ public class dirEntry extends dirSchema {
      */
     public String PROC_GET_DIR() {
         String returned = "RIBBON_UCTL_LOAD_DIR:" + this.toCsv() + "\n";
-        java.util.ListIterator<dirEntry> foldIter = this.FOLDED_DIR.listIterator();
+        java.util.ListIterator<DirEntry> foldIter = this.FOLDED_DIR.listIterator();
         while (foldIter.hasNext()) {
             returned += foldIter.next().PROC_GET_DIR();
         }
@@ -264,12 +264,12 @@ public class dirEntry extends dirSchema {
             for (Integer strIndex = 0; strIndex < this.DIR_ACCESS.length; strIndex++) {
                 stringedAccess[strIndex] = this.DIR_ACCESS[strIndex].toCsv();
             }
-            accessStr = Generic.csvFormat.renderGroup(stringedAccess);
+            accessStr = Generic.CsvFormat.renderGroup(stringedAccess);
         } else {
             accessStr = "[]";
         }
-        return this.FULL_DIR_NAME + ",{" + this.COMM + "}," + Generic.csvFormat.renderGroup(DIR_LANGS) + "," + 
-                accessStr + "," + Generic.csvFormat.renderGroup(this.DIR_EXPORTS);
+        return this.FULL_DIR_NAME + ",{" + this.COMM + "}," + Generic.CsvFormat.renderGroup(DIR_LANGS) + "," + 
+                accessStr + "," + Generic.CsvFormat.renderGroup(this.DIR_EXPORTS);
     }
 
     /**
@@ -278,7 +278,7 @@ public class dirEntry extends dirSchema {
      * @param rest rest of path
      * @return folded directory object
      */
-    public dirEntry returnEndDir(String upperLevel, String rest) {
+    public DirEntry returnEndDir(String upperLevel, String rest) {
         Integer joint;
         if ((joint = rest.indexOf(".")) != -1) {
             String indxed_DIR_NAME = rest.substring(0, joint);
@@ -305,14 +305,14 @@ public class dirEntry extends dirSchema {
      * @see dirEntry.dirPermissionEntry
      * @throws Exception 
      */
-    public dirPermissionEntry[] getAccess(String upperLevel, String rest) throws Exception {
+    public DirPermissionEntry[] getAccess(String upperLevel, String rest) throws Exception {
         Integer joint;
         if ((joint = rest.indexOf(".")) != -1) {
             String indxed_DIR_NAME = rest.substring(0, joint);
             if (this.hasFoldDir(indxed_DIR_NAME) == false) {
                 throw new Exception("Неможливо знайти шлях до напрямку!");
             } else {
-                dirPermissionEntry[] gainedAccess = lastEntry.getAccess(this.FULL_DIR_NAME, rest.substring(joint + 1));
+                DirPermissionEntry[] gainedAccess = lastEntry.getAccess(this.FULL_DIR_NAME, rest.substring(joint + 1));
                 if (gainedAccess == null) {
                     return this.DIR_ACCESS;
                 } else {
@@ -338,7 +338,7 @@ public class dirEntry extends dirSchema {
             this.DIR_PATH = basePath + "/" + this.DIR_PATH;
             new java.io.File(DIR_PATH).mkdirs();
         }
-        java.util.ListIterator<dirEntry> foldedIter = this.FOLDED_DIR.listIterator();
+        java.util.ListIterator<DirEntry> foldedIter = this.FOLDED_DIR.listIterator();
         while (foldedIter.hasNext()) {
             foldedIter.next().deployDir(basePath);
         }

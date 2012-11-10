@@ -9,7 +9,7 @@ package MessageClasses;
  * Contains name of the tag and indexes where this tag is present.
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  */
-public class tagEntry {
+public class TagEntry {
         
     /**
      * Name of the tag
@@ -25,7 +25,7 @@ public class tagEntry {
      * Default costructor
      * @param givenName name of new created tag
      */
-    tagEntry(String givenName) {
+    TagEntry(String givenName) {
         NAME = givenName;
         INDEXES = new java.util.ArrayList<String>();
     }
@@ -35,6 +35,6 @@ public class tagEntry {
      * @return csv line with tag name and it's index
      */
     public String toCsv() {
-        return this.NAME + Generic.csvFormat.renderGroup(this.INDEXES.toArray(new String[this.INDEXES.size()]));
+        return this.NAME + Generic.CsvFormat.renderGroup(this.INDEXES.toArray(new String[this.INDEXES.size()]));
     }
 }

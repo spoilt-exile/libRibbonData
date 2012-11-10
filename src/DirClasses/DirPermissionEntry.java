@@ -14,24 +14,24 @@ package DirClasses;
  * @author Stanislav Nepochatov
  * @since RibbonServer a2
  */
-public class dirPermissionEntry extends Generic.csvElder {
+public class DirPermissionEntry extends Generic.CsvElder {
     
     /**
      * Default constructor.
      * 
      * <p>Using for defining csv format options.</p>
      */
-    public dirPermissionEntry() {
-        this.currentFormat = Generic.csvElder.csvFormatType.DoubleStruct;
+    public DirPermissionEntry() {
+        this.currentFormat = Generic.CsvElder.csvFormatType.DoubleStruct;
     }
     
     /**
      * Default constructor
      * @param rawDescriptor string descriptor of permission to directory
      */
-    public dirPermissionEntry(String rawDescriptor) {
+    public DirPermissionEntry(String rawDescriptor) {
         this();
-        java.util.ArrayList<String[]> parsedStruct = Generic.csvFormat.fromCsv(this, rawDescriptor);
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, rawDescriptor);
         KEY = parsedStruct.get(0)[0].substring(1);
         IS_GROUP = parsedStruct.get(0)[0].charAt(0) == 'G' ? true : false;
         PERM_ARRAY = parsedStruct.get(0)[1].toCharArray();

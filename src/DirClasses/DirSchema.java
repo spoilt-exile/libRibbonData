@@ -13,17 +13,17 @@ package DirClasses;
  * tree and making dirEntry object.</p>
  * @author Stanislav Nepochatov
  */
-public class dirSchema extends Generic.csvElder {
+public class DirSchema extends Generic.CsvElder {
     
     /**
      * Default constructor.
      * 
      * <p>Using for defining csv format options.</p>
      */
-    public dirSchema() {
+    public DirSchema() {
         this.baseCount = 2;
         this.groupCount = 3;
-        this.currentFormat = Generic.csvElder.csvFormatType.ComplexCsv;
+        this.currentFormat = Generic.CsvElder.csvFormatType.ComplexCsv;
     }
     
     /**
@@ -31,9 +31,9 @@ public class dirSchema extends Generic.csvElder {
      * @param givenCsv given csv line
      * @since RibbonServer a2
      */
-    public dirSchema(String givenCsv) {
+    public DirSchema(String givenCsv) {
         this();
-        java.util.ArrayList<String[]> parsedStruct = Generic.csvFormat.fromCsv(this, givenCsv);
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         FULL_DIR_NAME = parsedStruct.get(0)[0];
         COMM = parsedStruct.get(0)[1];
         DIR_LANGS = parsedStruct.get(1);
@@ -47,7 +47,7 @@ public class dirSchema extends Generic.csvElder {
      * @param givenComm comment for directory
      * @param givenFlag anonymous flag for this directory
      */
-    public dirSchema(String givenPath, String givenComm) {
+    public DirSchema(String givenPath, String givenComm) {
         this();
         FULL_DIR_NAME = givenPath;
         COMM = givenComm;

@@ -11,7 +11,7 @@ package MessageClasses;
  * Contains all message fields but it's content.
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  */
-public class messageEntry extends Generic.csvElder {
+public class MessageEntry extends Generic.CsvElder {
 
     /**
      * Index of the original message
@@ -62,7 +62,7 @@ public class messageEntry extends Generic.csvElder {
      * System properties of this message.
      * @since RibbonServer a2
      */
-    public java.util.ArrayList<MessageClasses.messageProperty> PROPERTIES = new java.util.ArrayList<MessageClasses.messageProperty>();
+    public java.util.ArrayList<MessageClasses.MessageProperty> PROPERTIES = new java.util.ArrayList<MessageClasses.MessageProperty>();
     
     /**
      * Message language.
@@ -73,7 +73,7 @@ public class messageEntry extends Generic.csvElder {
     /**
      * Default empty constructor.
      */
-    messageEntry() {
+    MessageEntry() {
         this.baseCount = 8;
         this.groupCount = 2;
         this.currentFormat = csvFormatType.ComplexCsv;
@@ -83,9 +83,9 @@ public class messageEntry extends Generic.csvElder {
      * Default constructor from csv form.
      * @param givenCsv csv line
      */
-    messageEntry(String givenCsv) {
+    MessageEntry(String givenCsv) {
         this();
-        java.util.ArrayList<String[]> parsedStruct = Generic.csvFormat.fromCsv(this, givenCsv);
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
         this.INDEX = baseArray[0];
         this.ORIG_INDEX = baseArray[1];
@@ -99,15 +99,15 @@ public class messageEntry extends Generic.csvElder {
         String[] rawPropertiesArray = baseArray[7].split("$");
         if ((rawPropertiesArray.length > 1) || (rawPropertiesArray[0] != null)) {
             for (String rawProperty : rawPropertiesArray) {
-                this.PROPERTIES.add(new MessageClasses.messageProperty(rawProperty));
+                this.PROPERTIES.add(new MessageClasses.MessageProperty(rawProperty));
             }
         }
     }
     
     @Override
     public String toCsv() {
-        return this.INDEX + "," + this.ORIG_INDEX + "," + Generic.csvFormat.renderGroup(DIRS) + "," 
+        return this.INDEX + "," + this.ORIG_INDEX + "," + Generic.CsvFormat.renderGroup(DIRS) + "," 
                 + this.LANG + ",{" + this.HEADER + "}," + this.DATE + ",{" + this.ORIG_AUTHOR + "},{" + this.AUTHOR + "}," 
-                + Generic.csvFormat.renderGroup(TAGS) + "," + Generic.csvFormat.renderMessageProperties(PROPERTIES);
+                + Generic.CsvFormat.renderGroup(TAGS) + "," + Generic.CsvFormat.renderMessageProperties(PROPERTIES);
     }
 }

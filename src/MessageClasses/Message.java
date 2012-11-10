@@ -10,7 +10,7 @@ package MessageClasses;
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
  * @see messageEntry
  */
-public class Message extends MessageClasses.messageEntry {
+public class Message extends MessageClasses.MessageEntry {
     
     /**
      * Message's content
@@ -36,7 +36,7 @@ public class Message extends MessageClasses.messageEntry {
      * Return message entry from Message
      * @return messageEntry object
      */
-    public MessageClasses.messageEntry returnEntry() {
-        return (MessageClasses.messageEntry) this;
+    public MessageClasses.MessageEntry returnEntry() {
+        return (MessageClasses.MessageEntry) this;
     }
 }

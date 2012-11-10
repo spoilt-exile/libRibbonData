@@ -11,18 +11,18 @@ package UserClasses;
  * Contains all user properties.
  * @author Nepochatov Stanislav
  */
-public class userEntry extends Generic.csvElder {
+public class UserEntry extends Generic.CsvElder {
     
     /**
      * a2 endian constructor
      * @param givenCsv csv raw line
      * @since RibbonServer a2
      */
-    userEntry(String givenCsv) {
+    UserEntry(String givenCsv) {
         this.baseCount = 4;
         this.groupCount = 1;
-        this.currentFormat = Generic.csvElder.csvFormatType.ComplexCsv;
-        java.util.ArrayList<String[]> parsedStruct = Generic.csvFormat.fromCsv(this, givenCsv);
+        this.currentFormat = Generic.CsvElder.csvFormatType.ComplexCsv;
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
         String[] groupsArray = parsedStruct.get(1);
         USER_NAME = baseArray[0];
@@ -63,6 +63,6 @@ public class userEntry extends Generic.csvElder {
 
     @Override
     public String toCsv() {
-        return "{" + this.USER_NAME + "},{" + this.COMM + "}," + Generic.csvFormat.renderGroup(GROUPS) + "," + this.H_PASSWORD + "," + (IS_ENABLED ? "1" : "0");
+        return "{" + this.USER_NAME + "},{" + this.COMM + "}," + Generic.CsvFormat.renderGroup(GROUPS) + "," + this.H_PASSWORD + "," + (IS_ENABLED ? "1" : "0");
     }
 }
