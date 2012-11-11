@@ -73,7 +73,7 @@ public class MessageEntry extends Generic.CsvElder {
     /**
      * Default empty constructor.
      */
-    MessageEntry() {
+    public MessageEntry() {
         this.baseCount = 8;
         this.groupCount = 2;
         this.currentFormat = csvFormatType.ComplexCsv;
@@ -83,7 +83,7 @@ public class MessageEntry extends Generic.CsvElder {
      * Default constructor from csv form.
      * @param givenCsv csv line
      */
-    MessageEntry(String givenCsv) {
+    public MessageEntry(String givenCsv) {
         this();
         java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
@@ -97,7 +97,7 @@ public class MessageEntry extends Generic.CsvElder {
         this.AUTHOR = baseArray[6];
         this.TAGS = parsedStruct.get(2);
         String[] rawPropertiesArray = baseArray[7].split("$");
-        if ((rawPropertiesArray.length > 1) || (rawPropertiesArray[0] != null)) {
+        if ((rawPropertiesArray.length > 1) || (!rawPropertiesArray[0].isEmpty())) {
             for (String rawProperty : rawPropertiesArray) {
                 this.PROPERTIES.add(new MessageClasses.MessageProperty(rawProperty));
             }

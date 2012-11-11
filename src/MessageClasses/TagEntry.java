@@ -25,7 +25,7 @@ public class TagEntry {
      * Default costructor
      * @param givenName name of new created tag
      */
-    TagEntry(String givenName) {
+    public TagEntry(String givenName) {
         NAME = givenName;
         INDEXES = new java.util.ArrayList<String>();
     }
