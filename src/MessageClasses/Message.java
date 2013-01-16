@@ -59,22 +59,4 @@ public class Message extends MessageClasses.MessageEntry {
     public MessageClasses.MessageEntry returnEntry() {
         return (MessageClasses.MessageEntry) this;
     }
-    
-    /**
-     * Create message template for RIBBON_POST_MESSAGE command;<br>
-     * <br>
-     * CSV format:<br>
-     * ORIGINAL_INDEX,[DIR_1,DIR_2],LANG,{HEADER},[TAG_1,TAG_2]
-     * @param PostCsv given csv line for post command;
-     */
-    public void CreateMessageForPost(String PostCsv) {
-        this.baseCount = 4;
-        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, PostCsv);
-        String[] baseArray = parsedStruct.get(0);
-        this.ORIG_INDEX = baseArray[0];
-        this.LANG = baseArray[1];
-        this.HEADER = baseArray[2];
-        this.DIRS = parsedStruct.get(1);
-        this.TAGS = parsedStruct.get(2);
-    }
 }

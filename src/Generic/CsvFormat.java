@@ -326,4 +326,22 @@ public abstract class CsvFormat {
         }
         return null;
     }
+    
+    /**
+     * Split first argument of csv and rest of it.<br>
+     * it1,it2,it3 -> it1 and it2,it3
+     * @param givenCsv csv line to split;
+     * @return splited construction;
+     */
+    public static String[] splitCsv(String givenCsv) {
+        String[] result = new String[2];
+        for (Integer str = 0; str < givenCsv.length(); str++) {
+            if (givenCsv.charAt(str) == ',') {
+                result[0] = givenCsv.substring(0, str);
+                result[1] = givenCsv.substring(str + 1);
+                break;
+            }
+        }
+        return result;
+    }
 }

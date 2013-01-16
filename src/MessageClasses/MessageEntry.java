@@ -110,4 +110,50 @@ public class MessageEntry extends Generic.CsvElder {
                 + this.LANG + ",{" + this.HEADER + "}," + this.DATE + ",{" + this.ORIG_AUTHOR + "},{" + this.AUTHOR + "}," 
                 + Generic.CsvFormat.renderGroup(TAGS) + "," + Generic.CsvFormat.renderMessageProperties(PROPERTIES);
     }
+    
+    /**
+     * Create message template for RIBBON_POST_MESSAGE command;<br>
+     * <br>
+     * CSV format:<br>
+     * ORIGINAL_INDEX,[DIR_1,DIR_2],LANG,{HEADER},[TAG_1,TAG_2]
+     * @param PostCsv given csv line for post command;
+     */
+    public void createMessageForPost(String PostCsv) {
+        this.baseCount = 3;
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, PostCsv);
+        String[] baseArray = parsedStruct.get(0);
+        this.ORIG_INDEX = baseArray[0];
+        this.LANG = baseArray[1];
+        this.HEADER = baseArray[2];
+        this.DIRS = parsedStruct.get(1);
+        this.TAGS = parsedStruct.get(2);
+    }
+    
+    /**
+     * Create message template for RIBBON_MODIFY_MESSAGE command;<br>
+     * <br>
+     * CSV format:<br>
+     * [DIR_1,DIR_2],LANG,{HEADER},[TAG_1,TAG_2]
+     * @param modCsv given csv line for post command;
+     */
+    public void createMessageForModify(String modCsv) {
+        this.baseCount = 2;
+        java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, modCsv);
+        String[] baseArray = parsedStruct.get(0);
+        this.LANG = baseArray[0];
+        this.HEADER = baseArray[1];
+        this.DIRS = parsedStruct.get(1);
+        this.TAGS = parsedStruct.get(2);
+    }
+    
+    /**
+     * Modify message's fileds;
+     * @param givenMessage message template;
+     */
+    public void modifyMessageEntry(MessageEntry givenMessage) {
+        this.LANG = givenMessage.LANG;
+        this.HEADER = givenMessage.HEADER;
+        this.DIRS = givenMessage.DIRS;
+        this.TAGS = givenMessage.TAGS;
+    }
 }
