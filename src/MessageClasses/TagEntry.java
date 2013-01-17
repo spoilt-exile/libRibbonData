@@ -35,6 +35,6 @@ public class TagEntry {
      * @return csv line with tag name and it's index
      */
     public String toCsv() {
-        return this.NAME + Generic.CsvFormat.renderGroup(this.INDEXES.toArray(new String[this.INDEXES.size()]));
+        return this.NAME + "," + Generic.CsvFormat.renderGroup(this.INDEXES.toArray(new String[this.INDEXES.size()]));
     }
 }
