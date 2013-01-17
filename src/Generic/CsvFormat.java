@@ -14,6 +14,11 @@ package Generic;
 public abstract class CsvFormat {
     
     /**
+     * Group folds counter;
+     */
+    private static Integer Folds = 0;
+    
+    /**
      * Notify main parser method about special chars<br><br>
      * <<b>Statuses:</b><br>
      * <b>0</b> : ordinary char<br>
@@ -34,15 +39,27 @@ public abstract class CsvFormat {
             case ',':
                 if (((nextCh == '{') || (nextCh == '[')) && ((prevCh == '}') || (prevCh == ']'))) {
                     return 0;
-                } else if ((prevCh == '}') || (prevCh == ']')) {
+                } else if ((prevCh == '}') || (prevCh == ']') && (Folds == 0)) {
                     return 7;
                 } else {
                     return 1;
                 }
             case '{':
-                return 2;
+                if (Folds == 0) {
+                    Folds = Folds + 1;
+                    return 2;
+                } else {
+                    Folds = Folds + 1;
+                    return 0;
+                }
             case '}':
-                return 3;
+                if (Folds == 1) {
+                    Folds = Folds - 1;
+                    return 3;
+                } else {
+                    Folds = Folds - 1;
+                    return 0;
+                }
             case '[':
                 return 4;
             case ']':
@@ -213,7 +230,9 @@ public abstract class CsvFormat {
                     ignoreComma = true;
                     break;
                 case 7:
-                    beginSlice = index + 1;
+                    if (ignoreComma == false) {
+                        beginSlice = index + 1;
+                    }
                     break;
             }
             if ((!hasMoreSeparators(inputLine.substring(index + 1))) && (index < inputLine.length() - 1)) {

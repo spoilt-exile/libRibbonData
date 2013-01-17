@@ -38,7 +38,7 @@ public class MessageProperty extends Generic.CsvElder {
     /**
      * Empty configuration constructor.
      */
-    MessageProperty() {
+    public MessageProperty() {
         this.baseCount = 4;
         this.currentFormat = csvFormatType.SimpleCsv;
     }
@@ -47,7 +47,7 @@ public class MessageProperty extends Generic.CsvElder {
      * Default constructor from csv form.
      * @param givenCsv given csv line
      */
-    MessageProperty(String givenCsv) {
+    public MessageProperty(String givenCsv) {
         this();
         java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
@@ -64,7 +64,7 @@ public class MessageProperty extends Generic.CsvElder {
      * @param givenMessage
      * @param givenDate 
      */
-    MessageProperty(MessagePropertyTypes givenPrefix, String givenUser, String givenMessage, String givenDate) {
+    public MessageProperty(MessagePropertyTypes givenPrefix, String givenUser, String givenMessage, String givenDate) {
         
     }
 
