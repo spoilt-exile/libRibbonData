@@ -96,7 +96,7 @@ public class MessageEntry extends Generic.CsvElder {
         this.ORIG_AUTHOR = baseArray[5];
         this.AUTHOR = baseArray[6];
         this.TAGS = parsedStruct.get(2);
-        String[] rawPropertiesArray = baseArray[7].split("$");
+        String[] rawPropertiesArray = baseArray[7].split("\\$");
         if ((rawPropertiesArray.length > 1) || (!rawPropertiesArray[0].isEmpty())) {
             for (String rawProperty : rawPropertiesArray) {
                 this.PROPERTIES.add(new MessageClasses.MessageProperty(rawProperty));
