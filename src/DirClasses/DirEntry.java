@@ -103,7 +103,7 @@ public class DirEntry extends DirSchema {
      * Last searched directory
      * @since RibbonServer a2
      */
-    private DirEntry lastEntry;
+    protected DirEntry lastEntry;
 
     /**
      * Insert chain of directories in current directory
@@ -147,7 +147,7 @@ public class DirEntry extends DirSchema {
      * @param foldedDirName name of directory
      * @return true if this entry contain such directory in it's children
      */
-    private Boolean hasFoldDir(String foldedDirName) {
+    protected Boolean hasFoldDir(String foldedDirName) {
         java.util.ListIterator<DirEntry> dirIter = FOLDED_DIR.listIterator();
         while (dirIter.hasNext()) {
             DirEntry foldedDir = dirIter.next();
