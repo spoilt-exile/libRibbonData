@@ -64,12 +64,12 @@ public class DirEntry extends DirSchema {
                 FULL_DIR_NAME = upperLevel + "." + DIR_NAME;
             }
             DIR_PATH = FULL_DIR_NAME.toLowerCase().replaceAll("\\.", "/") + "/";
-            new java.io.File(DIR_PATH).mkdirs();
+            //new java.io.File(DIR_PATH).mkdirs();
             COMM = "Порожній напрямок";
             FOLDED_DIR.add(new DirEntry(FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
         } else {
             applySchema(givenSchema);
-            new java.io.File(DIR_PATH).mkdirs();
+            //new java.io.File(DIR_PATH).mkdirs();
         }
     }
 
