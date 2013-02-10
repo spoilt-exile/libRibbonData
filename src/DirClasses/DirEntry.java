@@ -50,9 +50,7 @@ public class DirEntry extends DirSchema {
      * Chain constuctor (adapted to a2)
      * @param upperLevel all parent directories
      * @param rest rest of the creation query
-     * @param givenComm commentary for directory
-     * @param givenPath path for images
-     * @param givenAnon anonymous mode flag
+     * @param givenSchema schema of child directory
      */
     public DirEntry(String upperLevel, String rest, DirClasses.DirSchema givenSchema) {
         Integer joint;
@@ -64,12 +62,10 @@ public class DirEntry extends DirSchema {
                 FULL_DIR_NAME = upperLevel + "." + DIR_NAME;
             }
             DIR_PATH = FULL_DIR_NAME.toLowerCase().replaceAll("\\.", "/") + "/";
-            //new java.io.File(DIR_PATH).mkdirs();
             COMM = "Порожній напрямок";
             FOLDED_DIR.add(new DirEntry(FULL_DIR_NAME, rest.substring(joint + 1), givenSchema));
         } else {
             applySchema(givenSchema);
-            //new java.io.File(DIR_PATH).mkdirs();
         }
     }
 
@@ -109,9 +105,7 @@ public class DirEntry extends DirSchema {
      * Insert chain of directories in current directory
      * @param upperLevel all parent directories
      * @param rest rest of the creation query
-     * @param givenComm commentary for directory
-     * @param givenPath path for images
-     * @param givenAnon anonymous mode flag
+     * @param givenSchema schema to apply
      */
     public void insertDir(String upperLevel, String rest, DirClasses.DirSchema givenSchema) {
         Integer joint;
@@ -161,7 +155,7 @@ public class DirEntry extends DirSchema {
 
     /**
      * Apply schema to given directory;
-     * @param givenSchema 
+     * @param givenSchema schema to apply
      */
     public void applySchema(DirClasses.DirSchema givenSchema) {
         this.FULL_DIR_NAME = givenSchema.FULL_DIR_NAME;

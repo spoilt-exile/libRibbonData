@@ -58,7 +58,6 @@ public class DirSchema extends Generic.CsvElder {
      * Parametrick costructor.
      * @param givenPath full path of directory
      * @param givenComm comment for directory
-     * @param givenFlag anonymous flag for this directory
      */
     public DirSchema(String givenPath, String givenComm) {
         this();
