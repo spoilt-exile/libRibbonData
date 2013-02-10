@@ -335,6 +335,31 @@ public abstract class CsvFormat {
     }
     
     /**
+     * Render given array to common line.
+     * 
+     * <p>Format: <code>'arr1,arr2,arr3,...arrN'</code><p>
+     * <p>Result of this method could be returned back to 
+     * array by commonParseLine method.</p>
+     * @param givenGroup group to render
+     * @return rendered string 
+     * @since RibbonServer a2
+     * @see #commonParseLine(java.lang.String, java.lang.Integer) 
+     */
+    public static String renderCommonLine(String[] givenGroup) {
+        if (givenGroup == null) {
+            return "";
+        }
+        String returned = "";
+        for (Integer rIndex = 0; rIndex < givenGroup.length; rIndex++) {
+            returned += givenGroup[rIndex];
+            if (rIndex < givenGroup.length - 1) {
+                returned += ",";
+            }
+        }
+        return returned;
+    }
+    
+    /**
      * Unified parse method.
      * 
      * <p>Using csvElder.currentFormat value to
