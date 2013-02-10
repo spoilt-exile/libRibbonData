@@ -68,6 +68,25 @@ public class Message extends MessageClasses.MessageEntry {
     }
     
     /**
+     * Construct Message from Messageentry;
+     * @param givenEntry message entry;
+     * @param givenContent content for message;
+     */
+    public Message (MessageEntry givenEntry, String givenContent) {
+        INDEX = givenEntry.INDEX;
+        ORIG_INDEX = givenEntry.ORIG_INDEX;
+        HEADER = givenEntry.HEADER;
+        AUTHOR = givenEntry.AUTHOR;
+        ORIG_AUTHOR = givenEntry.AUTHOR;
+        LANG = givenEntry.LANG;
+        DIRS = givenEntry.DIRS;
+        TAGS = givenEntry.TAGS;
+        DATE = givenEntry.DATE;
+        PROPERTIES = givenEntry.PROPERTIES;
+        CONTENT = givenContent;
+    }
+    
+    /**
      * Return message entry from Message
      * @return messageEntry object
      */
