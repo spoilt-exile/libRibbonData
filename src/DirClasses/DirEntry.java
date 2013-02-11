@@ -321,7 +321,7 @@ public class DirEntry extends DirSchema {
             } else {
                 DirPermissionEntry[] gainedAccess = lastEntry.getAccess(this.FULL_DIR_NAME, rest.substring(joint + 1));
                 if (gainedAccess == null) {
-                    return this.DIR_ACCESS;
+                    return lastEntry.DIR_ACCESS;
                 } else {
                     return gainedAccess;
                 }
