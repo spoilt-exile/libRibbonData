@@ -77,7 +77,7 @@ public class Message extends MessageClasses.MessageEntry {
         ORIG_INDEX = givenEntry.ORIG_INDEX;
         HEADER = givenEntry.HEADER;
         AUTHOR = givenEntry.AUTHOR;
-        ORIG_AUTHOR = givenEntry.AUTHOR;
+        ORIG_AUTHOR = givenEntry.ORIG_AUTHOR;
         LANG = givenEntry.LANG;
         DIRS = givenEntry.DIRS;
         TAGS = givenEntry.TAGS;
