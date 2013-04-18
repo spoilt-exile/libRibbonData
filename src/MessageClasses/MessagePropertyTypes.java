@@ -22,6 +22,9 @@ package MessageClasses;
 /**
  * Types of message properties.
  * @author Stanislav Nepochatov <spoilt.exile@gmail.com>
+ * @deprecated this class unsatisfied new specs.<br>
+ * Use <code>MessageProperty.Types</code> implementation.
+ * @see MessageClasses.MessageProperty.Types
  */
 public enum MessagePropertyTypes {
     
