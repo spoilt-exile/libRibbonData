@@ -96,10 +96,14 @@ public class MessageProperty extends Generic.CsvElder {
         /**
          * Register type if it doesn't exist in <code>typeList</code>.
          * @param givenType type to register;
+         * @return true if type added / false if type existed
          */
-        public static void registerTypeIfNotExist(String givenType) {
+        public static Boolean registerTypeIfNotExist(String givenType) {
             if(!Types.typeList.contains(givenType)) {
                 Types.typeList.add(givenType);
+                return true;
+            } else {
+                return false;
             }
         }
         
@@ -159,6 +163,6 @@ public class MessageProperty extends Generic.CsvElder {
     
     @Override
     public String toCsv() {
-        return this.PROPERTY_PREFIX + ",{" + this.USER + "},{" + this.TEXT_MESSAGE + "}," + this.DATE;
+        return this.TYPE + ",{" + this.USER + "},{" + this.TEXT_MESSAGE + "}," + this.DATE;
     }
 }
