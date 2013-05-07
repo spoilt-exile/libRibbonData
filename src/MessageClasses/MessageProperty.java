@@ -78,6 +78,7 @@ public class MessageProperty extends Generic.CsvElder {
         "MARK_ADM",                     //Admin was marked message with custom text message
         "PROCESSING_FORBIDDEN",         //User forbid any processing of message
         "NIGHT_EMBARGO",                //Message export will be performed at night
+        "COPYRIGHT",                    //Message copyright field
         
         /** System properties **/
         "CORRUPTED_AND_RESTORED",       //Message lost one of the link and it's link was restored by system
