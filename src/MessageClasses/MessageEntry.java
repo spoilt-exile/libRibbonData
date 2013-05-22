@@ -169,4 +169,21 @@ public class MessageEntry extends Generic.CsvElder {
         this.DIRS = givenMessage.DIRS;
         this.TAGS = givenMessage.TAGS;
     }
+    
+    /**
+     * Get single property by type.
+     * @param propType type to search;
+     * @return founded property or null.
+     */
+    public MessageProperty getProperty(String propType) {
+        MessageProperty returned = null;
+        java.util.ListIterator<MessageProperty> propIter = this.PROPERTIES.listIterator();
+        while (propIter.hasNext()) {
+            MessageProperty currProp = propIter.next();
+            if (currProp.TYPE.equals(propType)) {
+                returned = currProp;
+            }
+        }
+        return returned;
+    }
 }
