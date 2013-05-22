@@ -132,12 +132,18 @@ public class MessageEntry extends Generic.CsvElder {
      * @param PostCsv given csv line for post command;
      */
     public void createMessageForPost(String PostCsv) {
-        this.baseCount = 3;
+        this.baseCount = 4;
         java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, PostCsv);
         String[] baseArray = parsedStruct.get(0);
         this.ORIG_INDEX = baseArray[0];
         this.LANG = baseArray[1];
         this.HEADER = baseArray[2];
+        String[] rawPropertiesArray = baseArray[3].split("\\$");
+        if ((rawPropertiesArray.length > 1) || (!rawPropertiesArray[0].isEmpty())) {
+            for (String rawProperty : rawPropertiesArray) {
+                this.PROPERTIES.add(new MessageClasses.MessageProperty(rawProperty));
+            }
+        }
         this.DIRS = parsedStruct.get(1);
         this.TAGS = parsedStruct.get(2);
     }
@@ -150,11 +156,17 @@ public class MessageEntry extends Generic.CsvElder {
      * @param modCsv given csv line for post command;
      */
     public void createMessageForModify(String modCsv) {
-        this.baseCount = 2;
+        this.baseCount = 3;
         java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, modCsv);
         String[] baseArray = parsedStruct.get(0);
         this.LANG = baseArray[0];
         this.HEADER = baseArray[1];
+        String[] rawPropertiesArray = baseArray[2].split("\\$");
+        if ((rawPropertiesArray.length > 1) || (!rawPropertiesArray[0].isEmpty())) {
+            for (String rawProperty : rawPropertiesArray) {
+                this.PROPERTIES.add(new MessageClasses.MessageProperty(rawProperty));
+            }
+        }
         this.DIRS = parsedStruct.get(1);
         this.TAGS = parsedStruct.get(2);
     }
@@ -168,6 +180,7 @@ public class MessageEntry extends Generic.CsvElder {
         this.HEADER = givenMessage.HEADER;
         this.DIRS = givenMessage.DIRS;
         this.TAGS = givenMessage.TAGS;
+        this.PROPERTIES = givenMessage.PROPERTIES;
     }
     
     /**
@@ -185,5 +198,18 @@ public class MessageEntry extends Generic.CsvElder {
             }
         }
         return returned;
+    }
+    
+    /**
+     * Delete all properties excluding COPYRIGHT.
+     */
+    public void cleanProperties() {
+        java.util.ListIterator<MessageProperty> propIter = this.PROPERTIES.listIterator();
+        while (propIter.hasNext()) {
+            MessageProperty currProp = propIter.next();
+            if (!currProp.TYPE.equals("COPYRIGHT")) {
+                this.PROPERTIES.remove(currProp);
+            }
+        }
     }
 }
