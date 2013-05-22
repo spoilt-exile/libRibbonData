@@ -29,15 +29,6 @@ import java.util.Arrays;
 public class MessageProperty extends Generic.CsvElder {
     
     /**
-     * Prefix of the property.
-     * Displays type of property.
-     * @deprecated this filed unsatisfied new specs.<br>
-     * Use <code>TYPE</code> field.
-     * @see #TYPE
-     */
-    public MessagePropertyTypes PROPERTY_PREFIX;
-    
-    /**
      * Type of the property.
      */
     public String TYPE;
@@ -87,14 +78,6 @@ public class MessageProperty extends Generic.CsvElder {
         }));
         
         /**
-         * Register types from string array.
-         * @param givenTypes types to register;
-         */
-        public static void registerType(String[] givenTypes) {
-            Types.typeList.addAll(Arrays.asList(givenTypes));
-        }
-        
-        /**
          * Register type if it doesn't exist in <code>typeList</code>.
          * @param givenType type to register;
          * @return true if type added / false if type existed
@@ -135,7 +118,6 @@ public class MessageProperty extends Generic.CsvElder {
         this();
         java.util.ArrayList<String[]> parsedStruct = Generic.CsvFormat.fromCsv(this, givenCsv);
         String[] baseArray = parsedStruct.get(0);
-        //this.PROPERTY_PREFIX = MessagePropertyTypes.valueOf(baseArray[0]);
         this.TYPE = baseArray[0];
         this.USER = baseArray[1];
         this.TEXT_MESSAGE = baseArray[2];
@@ -158,6 +140,10 @@ public class MessageProperty extends Generic.CsvElder {
         this.TYPE_SUPPORTED = Types.isTypeRegistered(TYPE);
     }
     
+    /**
+     * Find oot about given type safety.
+     * @return true if type registered / false if not.
+     */
     public Boolean isTypeSafe() {
         return TYPE_SUPPORTED;
     }
