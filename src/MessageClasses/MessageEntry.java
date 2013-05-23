@@ -204,12 +204,10 @@ public class MessageEntry extends Generic.CsvElder {
      * Delete all properties excluding COPYRIGHT.
      */
     public void cleanProperties() {
-        java.util.ListIterator<MessageProperty> propIter = this.PROPERTIES.listIterator();
-        while (propIter.hasNext()) {
-            MessageProperty currProp = propIter.next();
-            if (!currProp.TYPE.equals("COPYRIGHT")) {
-                this.PROPERTIES.remove(currProp);
-            }
+        MessageProperty copyright = this.getProperty("COPYRIGHT");
+        this.PROPERTIES.clear();
+        if (copyright != null) {
+            this.PROPERTIES.add(copyright);
         }
     }
 }
