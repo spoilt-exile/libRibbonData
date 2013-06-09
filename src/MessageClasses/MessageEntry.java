@@ -210,4 +210,28 @@ public class MessageEntry extends Generic.CsvElder {
             this.PROPERTIES.add(copyright);
         }
     }
+    
+    /**
+     * Return copyright string of the message entry.
+     * @return copyright string or null if there is no copyright;
+     */
+    public String getCopyright() {
+        MessageProperty copyright = this.getProperty("COPYRIGHT");
+        if (copyright != null) {
+            return copyright.TEXT_MESSAGE;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Set copyright to the message.
+     * @param givenUser user which create copyright;
+     * @param givenCopyright name of the author of message;
+     * @param givenDate date to print;
+     */
+    public void setCopyright(String givenUser, String givenCopyright, String givenDate) {
+        this.PROPERTIES.remove(this.getProperty("COPYRIGHT"));
+        this.PROPERTIES.add(new MessageClasses.MessageProperty("COPYRIGHT", givenUser, givenCopyright, givenDate));
+    }
 }
