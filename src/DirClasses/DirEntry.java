@@ -162,8 +162,10 @@ public class DirEntry extends DirSchema {
         this.COMM = givenSchema.COMM;
         this.DIR_LANGS = givenSchema.DIR_LANGS;
         this.DIR_EXPORTS = givenSchema.DIR_EXPORTS;
-        if (givenSchema.SH_ACCESS.length == 1 && givenSchema.SH_ACCESS[0].isEmpty()) {
-            this.DIR_ACCESS = null;
+        if (givenSchema.SH_ACCESS == null) {
+             this.DIR_ACCESS = new DirPermissionEntry[1];
+        } else if (givenSchema.SH_ACCESS.length == 1 && givenSchema.SH_ACCESS[0].isEmpty()) {
+            this.DIR_ACCESS = new DirPermissionEntry[1];
         } else {
             this.DIR_ACCESS = new DirPermissionEntry[givenSchema.SH_ACCESS.length];
             for (Integer accessIndex = 0; accessIndex < givenSchema.SH_ACCESS.length; accessIndex++) {
