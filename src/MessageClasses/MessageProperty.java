@@ -132,11 +132,13 @@ public class MessageProperty extends Generic.CsvElder {
      * @param givenMessage
      * @param givenDate 
      */
-    public MessageProperty(String givenType, String givenUser, String givenMessage, String givenDate) {
+    public MessageProperty(String givenType, String givenUser, String givenMessage) {
         TYPE = givenType;
         USER = givenUser;
         TEXT_MESSAGE = givenMessage;
-        DATE = givenDate;
+        java.text.DateFormat dateFormat = new java.text.SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        java.util.Date now = new java.util.Date();
+        this.DATE = dateFormat.format(now);
         this.TYPE_SUPPORTED = Types.isTypeRegistered(TYPE);
     }
     
@@ -150,6 +152,6 @@ public class MessageProperty extends Generic.CsvElder {
     
     @Override
     public String toCsv() {
-        return this.TYPE + ",{" + this.USER + "},{" + this.TEXT_MESSAGE + "}," + this.DATE;
+        return this.TYPE + ",{" + this.USER + "},{" + (this.TEXT_MESSAGE != null ? this.TEXT_MESSAGE : "") + "}," + this.DATE;
     }
 }

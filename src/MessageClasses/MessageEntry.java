@@ -205,9 +205,13 @@ public class MessageEntry extends Generic.CsvElder {
      */
     public void cleanProperties() {
         MessageProperty copyright = this.getProperty("COPYRIGHT");
+        MessageProperty urgent = this.getProperty("URGENT");
         this.PROPERTIES.clear();
         if (copyright != null) {
             this.PROPERTIES.add(copyright);
+        }
+        if (urgent != null) {
+            this.PROPERTIES.add(urgent);
         }
     }
     
@@ -225,13 +229,22 @@ public class MessageEntry extends Generic.CsvElder {
     }
     
     /**
+     * Add property to the message;
+     * @param user creator of property;
+     * @param propType type of property;
+     * @param propText text of property (may be null)
+     */
+    public void addProperty(String user, String propType, String propText) {
+        this.PROPERTIES.add(new MessageClasses.MessageProperty(propType, user, propText));
+    }
+    
+    /**
      * Set copyright to the message.
      * @param givenUser user which create copyright;
      * @param givenCopyright name of the author of message;
-     * @param givenDate date to print;
      */
-    public void setCopyright(String givenUser, String givenCopyright, String givenDate) {
+    public void setCopyright(String givenUser, String givenCopyright) {
         this.PROPERTIES.remove(this.getProperty("COPYRIGHT"));
-        this.PROPERTIES.add(new MessageClasses.MessageProperty("COPYRIGHT", givenUser, givenCopyright, givenDate));
+        this.PROPERTIES.add(new MessageClasses.MessageProperty("COPYRIGHT", givenUser, givenCopyright));
     }
 }
